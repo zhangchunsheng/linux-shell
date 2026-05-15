@@ -3,55 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux 命令查询手册</title>
+
+    <!-- SEO Meta Tags -->
+    <title>Linux 命令查询手册 - 快速查找 Linux 命令语法、参数和示例</title>
+    <meta name="title" content="Linux 命令查询手册 - 快速查找 Linux 命令语法、参数和示例">
+    <meta name="description" content="免费在线 Linux 命令查询工具，提供完整的命令语法、参数说明和使用示例。支持实时搜索和分类筛选，包括文件管理、文本处理、系统管理、网络等常用命令。">
+    <meta name="keywords" content="Linux 命令，Linux 教程，命令行，shell 命令，bash 命令，Linux 查询，命令手册，Linux 参考，grep,awk,sed,find,tar,ssh">
+    <meta name="author" content="Linux Shell">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://shell.luomor.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shell.luomor.com/">
+    <meta property="og:title" content="Linux 命令查询手册 - 快速查找 Linux 命令语法、参数和示例">
+    <meta property="og:description" content="免费在线 Linux 命令查询工具，提供完整的命令语法、参数说明和使用示例。支持实时搜索和分类筛选。">
+    <meta property="og:image" content="https://shell.luomor.com/og-image.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://shell.luomor.com/">
+    <meta name="twitter:title" content="Linux 命令查询手册 - 快速查找 Linux 命令语法、参数和示例">
+    <meta name="twitter:description" content="免费在线 Linux 命令查询工具，提供完整的命令语法、参数说明和使用示例。支持实时搜索和分类筛选。">
+    <meta name="twitter:image" content="https://shell.luomor.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐧</text></svg>">
+
+    <!-- Preload -->
+    <link rel="preload" href="data/commands.json" as="fetch" crossorigin>
+    <link rel="preload" href="js/app.js" as="script">
+
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Linux 命令查询手册",
+        "url": "https://shell.luomor.com",
+        "description": "免费在线 Linux 命令查询工具，提供完整的命令语法、参数说明和使用示例",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Linux",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY"
+        },
+        "featureList": "实时搜索、分类筛选、命令语法、参数说明、使用示例"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "name": "Linux 命令参考手册",
+        "description": "Linux 命令完整参考，包括文件管理、文本处理、系统管理、网络等常用命令",
+        "articleSection": "Linux Shell Commands",
+        "keywords": "Linux,Shell,Bash,Command Line,CLI"
+    }
+    </script>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>🐧 Linux 命令查询手册</h1>
             <p class="subtitle">快速查找 Linux 命令语法、参数说明和使用示例</p>
+            <nav aria-label="主要导航">
+                <a href="#search" class="skip-link">跳到搜索</a>
+                <a href="#commands" class="skip-link">跳到命令列表</a>
+            </nav>
         </header>
 
-        <div class="search-section">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="搜索命令名称或描述..." autocomplete="off">
-                <span class="search-icon">🔍</span>
+        <main>
+            <section id="search" class="search-section" aria-label="搜索命令">
+                <div class="search-box">
+                    <label for="searchInput" class="visually-hidden">搜索命令</label>
+                    <input type="text" id="searchInput" placeholder="搜索命令名称或描述..." autocomplete="off" aria-describedby="searchHelp">
+                    <span class="search-icon" aria-hidden="true">🔍</span>
+                    <span id="searchHelp" class="visually-hidden">输入命令名称、描述或参数进行搜索</span>
+                </div>
+
+                <div class="filter-section">
+                    <label for="categoryFilter">分类筛选：</label>
+                    <select id="categoryFilter" aria-label="命令分类筛选">
+                        <option value="all">全部分类</option>
+                        <option value="文件管理">文件管理</option>
+                        <option value="文本处理">文本处理</option>
+                        <option value="系统管理">系统管理</option>
+                        <option value="网络">网络</option>
+                        <option value="帮助">帮助</option>
+                    </select>
+                </div>
+            </section>
+
+            <div class="results-info" role="status" aria-live="polite">
+                <span id="resultsCount">共 0 个命令</span>
+                <span class="quick-tips">
+                    💡 快速提示：按 <kbd>/</kbd> 键快速聚焦搜索框
+                </span>
             </div>
 
-            <div class="filter-section">
-                <label for="categoryFilter">分类筛选：</label>
-                <select id="categoryFilter">
-                    <option value="all">全部分类</option>
-                    <option value="文件管理">文件管理</option>
-                    <option value="文本处理">文本处理</option>
-                    <option value="系统管理">系统管理</option>
-                    <option value="网络">网络</option>
-                    <option value="帮助">帮助</option>
-                </select>
-            </div>
-        </div>
+            <section id="commands" aria-label="命令列表">
+                <div id="commandsList" class="commands-grid" role="list">
+                    <!-- 命令卡片将通过 JavaScript 动态加载 -->
+                    <!-- SEO: 初始渲染热门命令 -->
+                    <article class="command-card" role="listitem" data-command="ls">
+                        <span class="command-category">文件管理</span>
+                        <h2 class="command-name">ls</h2>
+                        <p class="command-desc">列出目录内容 (list directory contents)</p>
+                        <code class="command-syntax">ls [选项] [文件...]</code>
+                    </article>
+                    <article class="command-card" role="listitem" data-command="cd">
+                        <span class="command-category">文件管理</span>
+                        <h2 class="command-name">cd</h2>
+                        <p class="command-desc">切换当前工作目录 (change directory)</p>
+                        <code class="command-syntax">cd [目录]</code>
+                    </article>
+                    <article class="command-card" role="listitem" data-command="grep">
+                        <span class="command-category">文本处理</span>
+                        <h2 class="command-name">grep</h2>
+                        <p class="command-desc">在文件中搜索匹配的行</p>
+                        <code class="command-syntax">grep [选项] 模式 [文件...]</code>
+                    </article>
+                    <article class="command-card" role="listitem" data-command="find">
+                        <span class="command-category">文件管理</span>
+                        <h2 class="command-name">find</h2>
+                        <p class="command-desc">在目录树中查找文件</p>
+                        <code class="command-syntax">find [路径] [表达式]</code>
+                    </article>
+                    <article class="command-card" role="listitem" data-command="tar">
+                        <span class="command-category">文件管理</span>
+                        <h2 class="command-name">tar</h2>
+                        <p class="command-desc">打包和压缩文件 (tape archive)</p>
+                        <code class="command-syntax">tar [选项] [归档文件] [文件...]</code>
+                    </article>
+                    <article class="command-card" role="listitem" data-command="ssh">
+                        <span class="command-category">网络</span>
+                        <h2 class="command-name">ssh</h2>
+                        <p class="command-desc">安全远程登录 (secure shell)</p>
+                        <code class="command-syntax">ssh [选项] [用户@] 主机 [命令]</code>
+                    </article>
+                </div>
+            </section>
 
-        <div class="results-info">
-            <span id="resultsCount">共 0 个命令</span>
-            <span class="quick-tips">
-                💡 快速提示：按 <kbd>/</kbd> 键快速聚焦搜索框
-            </span>
-        </div>
+            <!-- SEO: 常见命令快速参考 -->
+            <section class="quick-reference" aria-label="常用命令速查">
+                <h2>Linux 常用命令速查</h2>
+                <div class="quick-ref-grid">
+                    <div class="quick-ref-category">
+                        <h3>文件操作</h3>
+                        <ul>
+                            <li><code>ls -l</code> - 详细列表</li>
+                            <li><code>cd 目录</code> - 切换目录</li>
+                            <li><code>cp 源 目标</code> - 复制文件</li>
+                            <li><code>mv 源 目标</code> - 移动文件</li>
+                            <li><code>rm 文件</code> - 删除文件</li>
+                        </ul>
+                    </div>
+                    <div class="quick-ref-category">
+                        <h3>文本处理</h3>
+                        <ul>
+                            <li><code>grep 模式</code> - 搜索文本</li>
+                            <li><code>awk '{print}'</code> - 文本分析</li>
+                            <li><code>sed 's/a/b/'</code> - 文本替换</li>
+                            <li><code>cat 文件</code> - 查看文件</li>
+                        </ul>
+                    </div>
+                    <div class="quick-ref-category">
+                        <h3>系统管理</h3>
+                        <ul>
+                            <li><code>ps aux</code> - 查看进程</li>
+                            <li><code>kill PID</code> - 终止进程</li>
+                            <li><code>df -h</code> - 磁盘空间</li>
+                            <li><code>free -m</code> - 内存使用</li>
+                        </ul>
+                    </div>
+                    <div class="quick-ref-category">
+                        <h3>网络</h3>
+                        <ul>
+                            <li><code>ssh user@host</code> - 远程登录</li>
+                            <li><code>curl URL</code> - 发送请求</li>
+                            <li><code>wget URL</code> - 下载文件</li>
+                            <li><code>ping host</code> - 测试连接</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-        <div id="commandsList" class="commands-grid">
-            <!-- 命令卡片将通过 JavaScript 动态加载 -->
-        </div>
-
-        <div id="commandModal" class="modal">
+        <div id="commandModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
             <div class="modal-content">
-                <span class="modal-close">&times;</span>
-                <div id="modalBody"></div>
+                <span class="modal-close" aria-label="关闭弹窗">&times;</span>
+                <div id="modalBody">
+                    <div class="modal-body">
+                        <h2 id="modalTitle">命令详情</h2>
+                        <p>点击命令卡片查看详情</p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <footer>
-            <p>数据来源：tldr-pages, man pages</p>
+            <p>数据来源：<a href="https://github.com/tldr-pages/tldr" target="_blank" rel="noopener">tldr-pages</a>, <a href="https://man7.org/linux/man-pages/" target="_blank" rel="noopener">Linux man pages</a></p>
+            <p>&copy; 2024 Linux 命令查询手册</p>
         </footer>
     </div>
 

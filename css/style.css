@@ -467,3 +467,108 @@ footer a:hover {
     font-size: 1.2rem;
     color: var(--text-muted);
 }
+
+/* Accessibility - Visually Hidden but screen reader accessible */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Skip Links */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Quick Reference Section */
+.quick-reference {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.quick-reference h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.quick-ref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.quick-ref-category h3 {
+    color: var(--primary-dark);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.quick-ref-category ul {
+    list-style: none;
+}
+
+.quick-ref-category li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.quick-ref-category li:last-child {
+    border-bottom: none;
+}
+
+.quick-ref-category code {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+    }
+
+    .search-section,
+    .quick-tips,
+    .modal,
+    footer {
+        display: none;
+    }
+
+    .commands-grid {
+        display: block;
+    }
+
+    .command-card {
+        break-inside: avoid;
+        margin-bottom: 20px;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}

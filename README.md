@@ -86,7 +86,6 @@ npx http-server -p 8000
 
 ## 参考资料
 
-- [菜鸟教程 Linux Shell](https://www.runoob.com/linux/linux-shell.html)
 - [tldr-pages](https://github.com/tldr-pages/tldr)
 - [Linux man pages](https://man7.org/linux/man-pages/)
 

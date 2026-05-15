@@ -41,3 +41,13 @@ Linux 命令查询手册 - 一个简洁的 Linux 命令查询静态网站，提�
 本项目为纯静态网站，无需构建：
 - 本地开发：直接打开 `index.html` 或使用 `python3 -m http.server 8000`
 - 部署：将全部文件上传至静态托管服务（GitHub Pages、Vercel、Netlify 等）
+
+## SEO
+
+已配置的 SEO 功能：
+- Meta 标签（title, description, keywords）
+- Open Graph / Twitter Cards
+- JSON-LD 结构化数据（WebApplication + TechArticle）
+- sitemap.xml 和 robots.txt
+- 语义化 HTML 标签和 ARIA 属性
+- 首屏 SEO 内容（初始渲染热门命令）

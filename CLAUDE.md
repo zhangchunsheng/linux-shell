@@ -15,6 +15,8 @@ Linux 命令查询手册 - 一个简洁的 Linux 命令查询静态网站，提�
 - `css/style.css` - 样式，采用 CSS 变量和响应式设计
 - `js/app.js` - 核心逻辑：加载 JSON 数据、搜索/筛选、渲染卡片和弹窗详情
 - `data/commands.json` - 命令数据源（JSON 格式）
+- `sitemap.xml` - 站点地图，用于搜索引擎索引
+- `robots.txt` - 搜索引擎爬虫配置
 
 数据流：页面加载 → fetch JSON → 渲染卡片 → 用户搜索/筛选 → 实时更新列表 → 点击卡片显示详情弹窗
 

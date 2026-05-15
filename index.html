@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux 命令查询手册</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐧 Linux 命令查询手册</h1>
+            <p class="subtitle">快速查找 Linux 命令语法、参数说明和使用示例</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索命令名称或描述..." autocomplete="off">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="filter-section">
+                <label for="categoryFilter">分类筛选：</label>
+                <select id="categoryFilter">
+                    <option value="all">全部分类</option>
+                    <option value="文件管理">文件管理</option>
+                    <option value="文本处理">文本处理</option>
+                    <option value="系统管理">系统管理</option>
+                    <option value="网络">网络</option>
+                    <option value="帮助">帮助</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="results-info">
+            <span id="resultsCount">共 0 个命令</span>
+            <span class="quick-tips">
+                💡 快速提示：按 <kbd>/</kbd> 键快速聚焦搜索框
+            </span>
+        </div>
+
+        <div id="commandsList" class="commands-grid">
+            <!-- 命令卡片将通过 JavaScript 动态加载 -->
+        </div>
+
+        <div id="commandModal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <div id="modalBody"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>参考：<a href="https://www.runoob.com/linux/linux-shell.html" target="_blank">菜鸟教程 Linux Shell</a></p>
+            <p>数据来源：tldr-pages, man pages</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

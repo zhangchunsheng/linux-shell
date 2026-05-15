@@ -1,0 +1,767 @@
+{
+  "commands": [
+    {
+      "name": "ls",
+      "category": "文件管理",
+      "description": "列出目录内容 (list directory contents)",
+      "syntax": "ls [选项] [文件...]",
+      "options": [
+        { "flag": "-l", "description": "使用长列表格式，显示权限、所有者、大小、时间" },
+        { "flag": "-a", "description": "显示所有文件，包括以.开头的隐藏文件" },
+        { "flag": "-h", "description": "人类可读的文件大小 (K, M, G)" },
+        { "flag": "-R", "description": "递归显示子目录内容" },
+        { "flag": "-t", "description": "按修改时间排序" },
+        { "flag": "-S", "description": "按文件大小排序" }
+      ],
+      "examples": [
+        { "cmd": "ls", "desc": "列出当前目录内容" },
+        { "cmd": "ls -l", "desc": "以长格式列出详细信息" },
+        { "cmd": "ls -la", "desc": "列出所有文件（含隐藏文件）的详细信息" },
+        { "cmd": "ls -lh /home", "desc": "以人类可读格式显示/home 目录" }
+      ]
+    },
+    {
+      "name": "cd",
+      "category": "文件管理",
+      "description": "切换当前工作目录 (change directory)",
+      "syntax": "cd [目录]",
+      "options": [
+        { "flag": "cd", "description": "不带参数时返回用户主目录" },
+        { "flag": "cd -", "description": "返回上一个工作目录" },
+        { "flag": "cd ..", "description": "返回上一级目录" }
+      ],
+      "examples": [
+        { "cmd": "cd /usr/local", "desc": "切换到/usr/local 目录" },
+        { "cmd": "cd ~", "desc": "返回用户主目录" },
+        { "cmd": "cd -", "desc": "返回上一个目录" }
+      ]
+    },
+    {
+      "name": "pwd",
+      "category": "文件管理",
+      "description": "显示当前工作目录的完整路径 (print working directory)",
+      "syntax": "pwd [选项]",
+      "options": [
+        { "flag": "-L", "description": "显示逻辑路径（跟随符号链接）" },
+        { "flag": "-P", "description": "显示物理路径（不跟随符号链接，默认）" }
+      ],
+      "examples": [
+        { "cmd": "pwd", "desc": "显示当前目录路径" }
+      ]
+    },
+    {
+      "name": "mkdir",
+      "category": "文件管理",
+      "description": "创建新目录 (make directory)",
+      "syntax": "mkdir [选项] 目录名",
+      "options": [
+        { "flag": "-p", "description": "递归创建目录，如果父目录不存在则一并创建" },
+        { "flag": "-v", "description": "显示详细输出，报告创建的每个目录" }
+      ],
+      "examples": [
+        { "cmd": "mkdir myfolder", "desc": "创建名为 myfolder 的目录" },
+        { "cmd": "mkdir -p a/b/c", "desc": "递归创建嵌套目录 a/b/c" },
+        { "cmd": "mkdir -v test", "desc": "创建目录并显示创建信息" }
+      ]
+    },
+    {
+      "name": "rm",
+      "category": "文件管理",
+      "description": "删除文件或目录 (remove)",
+      "syntax": "rm [选项] 文件...",
+      "options": [
+        { "flag": "-i", "description": "交互模式，删除前逐个询问确认" },
+        { "flag": "-f", "description": "强制删除，不询问确认" },
+        { "flag": "-r", "description": "递归删除目录及其内容" },
+        { "flag": "-v", "description": "显示详细删除过程" }
+      ],
+      "examples": [
+        { "cmd": "rm file.txt", "desc": "删除文件 file.txt" },
+        { "cmd": "rm -i important.txt", "desc": "删除前询问确认" },
+        { "cmd": "rm -r myfolder", "desc": "递归删除目录 myfolder" },
+        { "cmd": "rm -rf old_project", "desc": "强制递归删除（危险操作！）" }
+      ]
+    },
+    {
+      "name": "cp",
+      "category": "文件管理",
+      "description": "复制文件或目录 (copy)",
+      "syntax": "cp [选项] 源文件 目标文件",
+      "options": [
+        { "flag": "-r", "description": "递归复制目录及其内容" },
+        { "flag": "-i", "description": "交互模式，覆盖前询问" },
+        { "flag": "-v", "description": "显示详细复制过程" },
+        { "flag": "-p", "description": "保留原文件的属性（权限、时间戳等）" }
+      ],
+      "examples": [
+        { "cmd": "cp file.txt backup.txt", "desc": "复制文件为 backup.txt" },
+        { "cmd": "cp -r dir1 dir2", "desc": "递归复制目录 dir1 到 dir2" },
+        { "cmd": "cp -i source.txt dest.txt", "desc": "覆盖前询问确认" }
+      ]
+    },
+    {
+      "name": "mv",
+      "category": "文件管理",
+      "description": "移动或重命名文件/目录 (move)",
+      "syntax": "mv [选项] 源文件 目标文件",
+      "options": [
+        { "flag": "-i", "description": "交互模式，覆盖前询问" },
+        { "flag": "-v", "description": "显示详细移动过程" },
+        { "flag": "-n", "description": "不覆盖已存在的文件" }
+      ],
+      "examples": [
+        { "cmd": "mv old.txt new.txt", "desc": "重命名文件" },
+        { "cmd": "mv file.txt /home/user/", "desc": "移动文件到其他目录" },
+        { "cmd": "mv -i source.txt dest.txt", "desc": "覆盖前询问" }
+      ]
+    },
+    {
+      "name": "cat",
+      "category": "文件管理",
+      "description": "连接文件并输出到标准输出 (concatenate)",
+      "syntax": "cat [选项] [文件...]",
+      "options": [
+        { "flag": "-n", "description": "对所有行编号（包括空行）" },
+        { "flag": "-b", "description": "对非空行编号" },
+        { "flag": "-E", "description": "在每行末尾显示 $" },
+        { "flag": "-A", "description": "显示所有非打印字符" }
+      ],
+      "examples": [
+        { "cmd": "cat file.txt", "desc": "显示文件内容" },
+        { "cmd": "cat -n file.txt", "desc": "带行号显示" },
+        { "cmd": "cat file1.txt file2.txt", "desc": "合并显示多个文件" },
+        { "cmd": "cat file1.txt > combined.txt", "desc": "将文件内容输出到新文件" }
+      ]
+    },
+    {
+      "name": "echo",
+      "category": "文件管理",
+      "description": "输出文本或变量值",
+      "syntax": "echo [选项] [文本]",
+      "options": [
+        { "flag": "-n", "description": "输出末尾不换行" },
+        { "flag": "-e", "description": "启用转义字符解释（\\n, \\t 等）" }
+      ],
+      "examples": [
+        { "cmd": "echo \"Hello World\"", "desc": "输出文本" },
+        { "cmd": "echo $HOME", "desc": "输出环境变量值" },
+        { "cmd": "echo -e \"Line1\\nLine2\"", "desc": "输出带换行的文本" },
+        { "cmd": "echo \"text\" > file.txt", "desc": "将文本写入文件" }
+      ]
+    },
+    {
+      "name": "touch",
+      "category": "文件管理",
+      "description": "创建空文件或更新文件时间戳",
+      "syntax": "touch [选项] 文件...",
+      "options": [
+        { "flag": "-a", "description": "只修改访问时间" },
+        { "flag": "-m", "description": "只修改修改时间" },
+        { "flag": "-t", "description": "指定特定时间戳" }
+      ],
+      "examples": [
+        { "cmd": "touch newfile.txt", "desc": "创建空文件" },
+        { "cmd": "touch file1 file2 file3", "desc": "创建多个文件" },
+        { "cmd": "touch -t 202401011200 file.txt", "desc": "设置特定时间戳" }
+      ]
+    },
+    {
+      "name": "grep",
+      "category": "文本处理",
+      "description": "在文件中搜索匹配的行 (global regular expression print)",
+      "syntax": "grep [选项] 模式 [文件...]",
+      "options": [
+        { "flag": "-i", "description": "忽略大小写" },
+        { "flag": "-v", "description": "反向匹配，输出不匹配的行" },
+        { "flag": "-r", "description": "递归搜索目录" },
+        { "flag": "-n", "description": "显示匹配行的行号" },
+        { "flag": "-l", "description": "只显示包含匹配的文件名" },
+        { "flag": "-c", "description": "只输出匹配行数" },
+        { "flag": "-E", "description": "使用扩展正则表达式" }
+      ],
+      "examples": [
+        { "cmd": "grep \"error\" logfile.txt", "desc": "搜索包含 error 的行" },
+        { "cmd": "grep -i \"hello\" file.txt", "desc": "忽略大小写搜索" },
+        { "cmd": "grep -r \"TODO\" ./src", "desc": "递归搜索 src 目录" },
+        { "cmd": "grep -n \"main\" program.c", "desc": "显示行号" },
+        { "cmd": "grep -v \"^#\" config.conf", "desc": "过滤掉注释行" }
+      ]
+    },
+    {
+      "name": "awk",
+      "category": "文本处理",
+      "description": "强大的文本分析和数据处理工具",
+      "syntax": "awk [选项] '程序' [文件...]",
+      "options": [
+        { "flag": "-F", "description": "指定字段分隔符" },
+        { "flag": "-v", "description": "定义变量" }
+      ],
+      "examples": [
+        { "cmd": "awk '{print $1}' file.txt", "desc": "打印第一列" },
+        { "cmd": "awk -F: '{print $1}' /etc/passwd", "desc": "以:分隔，打印用户名" },
+        { "cmd": "awk '/pattern/{print $0}' file.txt", "desc": "打印匹配模式的行" },
+        { "cmd": "awk 'NR>5' file.txt", "desc": "跳过前 5 行" }
+      ]
+    },
+    {
+      "name": "sed",
+      "category": "文本处理",
+      "description": "流编辑器，用于过滤和转换文本 (stream editor)",
+      "syntax": "sed [选项] '脚本' [文件...]",
+      "options": [
+        { "flag": "-i", "description": "直接修改文件内容" },
+        { "flag": "-n", "description": "只输出匹配的行" },
+        { "flag": "-e", "description": "允许多个编辑操作" }
+      ],
+      "examples": [
+        { "cmd": "sed 's/old/new/' file.txt", "desc": "替换第一个匹配" },
+        { "cmd": "sed 's/old/new/g' file.txt", "desc": "全局替换" },
+        { "cmd": "sed -n '5,10p' file.txt", "desc": "打印第 5-10 行" },
+        { "cmd": "sed -i 's/foo/bar/g' file.txt", "desc": "直接修改文件" }
+      ]
+    },
+    {
+      "name": "cut",
+      "category": "文本处理",
+      "description": "按列切割文本",
+      "syntax": "cut [选项] [文件...]",
+      "options": [
+        { "flag": "-d", "description": "指定分隔符" },
+        { "flag": "-f", "description": "选择字段" },
+        { "flag": "-c", "description": "选择字符位置" }
+      ],
+      "examples": [
+        { "cmd": "cut -d: -f1 /etc/passwd", "desc": "提取用户名" },
+        { "cmd": "cut -c1-5 file.txt", "desc": "提取每行前 5 个字符" }
+      ]
+    },
+    {
+      "name": "sort",
+      "category": "文本处理",
+      "description": "对文本行排序",
+      "syntax": "sort [选项] [文件...]",
+      "options": [
+        { "flag": "-r", "description": "逆序排序" },
+        { "flag": "-n", "description": "数值排序" },
+        { "flag": "-u", "description": "去重排序" },
+        { "flag": "-k", "description": "按指定列排序" }
+      ],
+      "examples": [
+        { "cmd": "sort file.txt", "desc": "字母排序" },
+        { "cmd": "sort -n numbers.txt", "desc": "数值排序" },
+        { "cmd": "sort -u file.txt", "desc": "排序并去重" }
+      ]
+    },
+    {
+      "name": "wc",
+      "category": "文本处理",
+      "description": "统计行数、字数、字节数 (word count)",
+      "syntax": "wc [选项] [文件...]",
+      "options": [
+        { "flag": "-l", "description": "只统计行数" },
+        { "flag": "-w", "description": "只统计单词数" },
+        { "flag": "-c", "description": "只统计字节数" },
+        { "flag": "-m", "description": "只统计字符数" }
+      ],
+      "examples": [
+        { "cmd": "wc file.txt", "desc": "统计行数、单词数、字节数" },
+        { "cmd": "wc -l file.txt", "desc": "只统计行数" },
+        { "cmd": "wc -w *.txt", "desc": "统计所有 txt 文件单词数" }
+      ]
+    },
+    {
+      "name": "head",
+      "category": "文本处理",
+      "description": "显示文件开头内容",
+      "syntax": "head [选项] [文件...]",
+      "options": [
+        { "flag": "-n", "description": "显示指定行数" }
+      ],
+      "examples": [
+        { "cmd": "head file.txt", "desc": "显示前 10 行" },
+        { "cmd": "head -n 20 file.txt", "desc": "显示前 20 行" }
+      ]
+    },
+    {
+      "name": "tail",
+      "category": "文本处理",
+      "description": "显示文件末尾内容",
+      "syntax": "tail [选项] [文件...]",
+      "options": [
+        { "flag": "-n", "description": "显示指定行数" },
+        { "flag": "-f", "description": "持续跟踪文件变化（查看日志）" }
+      ],
+      "examples": [
+        { "cmd": "tail file.log", "desc": "显示最后 10 行" },
+        { "cmd": "tail -f /var/log/syslog", "desc": "实时查看日志" },
+        { "cmd": "tail -n 100 app.log", "desc": "显示最后 100 行" }
+      ]
+    },
+    {
+      "name": "find",
+      "category": "文件管理",
+      "description": "在目录树中查找文件",
+      "syntax": "find [路径] [表达式]",
+      "options": [
+        { "flag": "-name", "description": "按文件名查找" },
+        { "flag": "-type", "description": "按文件类型查找 (f=文件，d=目录)" },
+        { "flag": "-size", "description": "按文件大小查找" },
+        { "flag": "-mtime", "description": "按修改时间查找" },
+        { "flag": "-exec", "description": "对结果执行命令" },
+        { "flag": "-perm", "description": "按权限查找" }
+      ],
+      "examples": [
+        { "cmd": "find . -name \"*.txt\"", "desc": "查找当前目录下所有 txt 文件" },
+        { "cmd": "find /home -type d", "desc": "查找/home 下所有目录" },
+        { "cmd": "find . -size +10M", "desc": "查找大于 10M 的文件" },
+        { "cmd": "find . -mtime -7", "desc": "查找 7 天内修改的文件" },
+        { "cmd": "find . -name \"*.log\" -exec rm {} \\;", "desc": "查找并删除所有 log 文件" }
+      ]
+    },
+    {
+      "name": "chmod",
+      "category": "系统管理",
+      "description": "修改文件权限 (change mode)",
+      "syntax": "chmod [选项] 模式 文件...",
+      "options": [
+        { "flag": "-R", "description": "递归修改目录及其内容" },
+        { "flag": "-v", "description": "显示详细过程" }
+      ],
+      "examples": [
+        { "cmd": "chmod +x script.sh", "desc": "添加执行权限" },
+        { "cmd": "chmod 755 file.txt", "desc": "设置权限为 rwxr-xr-x" },
+        { "cmd": "chmod 644 file.txt", "desc": "设置权限为 rw-r--r--" },
+        { "cmd": "chmod -R 755 /dir", "desc": "递归设置目录权限" }
+      ]
+    },
+    {
+      "name": "chown",
+      "category": "系统管理",
+      "description": "修改文件所有者 (change owner)",
+      "syntax": "chown [选项] 所有者 [:组] 文件...",
+      "options": [
+        { "flag": "-R", "description": "递归修改" },
+        { "flag": "-v", "description": "显示详细过程" }
+      ],
+      "examples": [
+        { "cmd": "chown user file.txt", "desc": "修改文件所有者" },
+        { "cmd": "chown user:group file.txt", "desc": "同时修改所有者和组" },
+        { "cmd": "chown -R user /dir", "desc": "递归修改目录所有者" }
+      ]
+    },
+    {
+      "name": "ps",
+      "category": "系统管理",
+      "description": "显示当前进程状态 (process status)",
+      "syntax": "ps [选项]",
+      "options": [
+        { "flag": "aux", "description": "显示所有进程详细信息" },
+        { "flag": "-ef", "description": "显示所有进程完整格式" },
+        { "flag": "u", "description": "显示用户格式" }
+      ],
+      "examples": [
+        { "cmd": "ps aux", "desc": "显示所有进程详细信息" },
+        { "cmd": "ps -ef", "desc": "显示所有进程" },
+        { "cmd": "ps aux | grep nginx", "desc": "查找 nginx 进程" }
+      ]
+    },
+    {
+      "name": "top",
+      "category": "系统管理",
+      "description": "实时显示系统进程和资源使用情况",
+      "syntax": "top [选项]",
+      "options": [
+        { "flag": "-d", "description": "指定刷新间隔（秒）" },
+        { "flag": "-u", "description": "显示指定用户的进程" }
+      ],
+      "examples": [
+        { "cmd": "top", "desc": "启动 top 监控" },
+        { "cmd": "top -d 5", "desc": "每 5 秒刷新一次" },
+        { "cmd": "top -u www-data", "desc": "只显示 www-data 用户进程" }
+      ]
+    },
+    {
+      "name": "kill",
+      "category": "系统管理",
+      "description": "向进程发送信号（通常用于终止进程）",
+      "syntax": "kill [选项] PID...",
+      "options": [
+        { "flag": "-9", "description": "强制终止（SIGKILL）" },
+        { "flag": "-15", "description": "正常终止（SIGTERM，默认）" },
+        { "flag": "-l", "description": "列出所有信号" }
+      ],
+      "examples": [
+        { "cmd": "kill 1234", "desc": "发送 TERM 信号给进程 1234" },
+        { "cmd": "kill -9 1234", "desc": "强制杀死进程" },
+        { "cmd": "kill -l", "desc": "查看所有信号列表" }
+      ]
+    },
+    {
+      "name": "df",
+      "category": "系统管理",
+      "description": "显示磁盘空间使用情况 (disk free)",
+      "syntax": "df [选项] [文件...]",
+      "options": [
+        { "flag": "-h", "description": "人类可读格式（K, M, G）" },
+        { "flag": "-T", "description": "显示文件系统类型" },
+        { "flag": "-a", "description": "显示所有文件系统" }
+      ],
+      "examples": [
+        { "cmd": "df -h", "desc": "以人类可读格式显示磁盘使用" },
+        { "cmd": "df -hT", "desc": "显示文件系统和类型" }
+      ]
+    },
+    {
+      "name": "du",
+      "category": "系统管理",
+      "description": "显示目录或文件的磁盘使用情况 (disk usage)",
+      "syntax": "du [选项] [文件...]",
+      "options": [
+        { "flag": "-h", "description": "人类可读格式" },
+        { "flag": "-s", "description": "只显示总计" },
+        { "flag": "-a", "description": "显示所有文件" },
+        { "flag": "--max-depth=N", "description": "限制递归深度" }
+      ],
+      "examples": [
+        { "cmd": "du -sh /home", "desc": "显示/home 目录总大小" },
+        { "cmd": "du -h --max-depth=1", "desc": "显示当前目录各一级子目录大小" }
+      ]
+    },
+    {
+      "name": "free",
+      "category": "系统管理",
+      "description": "显示系统内存使用情况",
+      "syntax": "free [选项]",
+      "options": [
+        { "flag": "-h", "description": "人类可读格式" },
+        { "flag": "-m", "description": "以 MB 显示" },
+        { "flag": "-g", "description": "以 GB 显示" },
+        { "flag": "-s", "description": "持续监控，指定间隔秒数" }
+      ],
+      "examples": [
+        { "cmd": "free -h", "desc": "显示内存使用（人类可读）" },
+        { "cmd": "free -m", "desc": "以 MB 显示" },
+        { "cmd": "free -h -s 5", "desc": "每 5 秒刷新显示" }
+      ]
+    },
+    {
+      "name": "uname",
+      "category": "系统管理",
+      "description": "显示系统信息 (unix name)",
+      "syntax": "uname [选项]",
+      "options": [
+        { "flag": "-a", "description": "显示所有信息" },
+        { "flag": "-r", "description": "显示内核版本" },
+        { "flag": "-m", "description": "显示机器硬件架构" },
+        { "flag": "-o", "description": "显示操作系统" }
+      ],
+      "examples": [
+        { "cmd": "uname -a", "desc": "显示所有系统信息" },
+        { "cmd": "uname -r", "desc": "显示内核版本" },
+        { "cmd": "uname -m", "desc": "显示 CPU 架构" }
+      ]
+    },
+    {
+      "name": "man",
+      "category": "帮助",
+      "description": "显示命令手册页 (manual)",
+      "syntax": "man [选项] 命令",
+      "options": [
+        { "flag": "-k", "description": "搜索关键字" },
+        { "flag": "-f", "description": "显示命令简介" }
+      ],
+      "examples": [
+        { "cmd": "man ls", "desc": "查看 ls 命令帮助" },
+        { "cmd": "man -k copy", "desc": "搜索与 copy 相关的命令" }
+      ]
+    },
+    {
+      "name": "history",
+      "category": "系统管理",
+      "description": "显示命令历史记录",
+      "syntax": "history [选项]",
+      "options": [
+        { "flag": "-c", "description": "清除历史记录" },
+        { "flag": "-d offset", "description": "删除指定位置的命令" }
+      ],
+      "examples": [
+        { "cmd": "history", "desc": "显示所有历史命令" },
+        { "cmd": "history | grep git", "desc": "搜索历史 git 命令" },
+        { "cmd": "history -c", "desc": "清除历史记录" }
+      ]
+    },
+    {
+      "name": "alias",
+      "category": "系统管理",
+      "description": "设置或显示命令别名",
+      "syntax": "alias [名称 [=值]]",
+      "options": [
+        { "flag": "alias", "description": "显示所有别名" },
+        { "flag": "unalias", "description": "删除别名" }
+      ],
+      "examples": [
+        { "cmd": "alias", "desc": "显示所有别名" },
+        { "cmd": "alias ll='ls -la'", "desc": "创建别名 ll" },
+        { "cmd": "unalias ll", "desc": "删除别名 ll" }
+      ]
+    },
+    {
+      "name": "ssh",
+      "category": "网络",
+      "description": "安全远程登录 (secure shell)",
+      "syntax": "ssh [选项] [用户@]主机 [命令]",
+      "options": [
+        { "flag": "-p", "description": "指定端口号" },
+        { "flag": "-i", "description": "指定私钥文件" },
+        { "flag": "-C", "description": "启用压缩" }
+      ],
+      "examples": [
+        { "cmd": "ssh user@192.168.1.100", "desc": "登录远程主机" },
+        { "cmd": "ssh -p 2222 user@host", "desc": "指定端口登录" },
+        { "cmd": "ssh -i ~/.ssh/id_rsa user@host", "desc": "使用密钥登录" }
+      ]
+    },
+    {
+      "name": "curl",
+      "category": "网络",
+      "description": "通过 URL 传输数据 (client URL)",
+      "syntax": "curl [选项] URL",
+      "options": [
+        { "flag": "-o", "description": "输出到文件" },
+        { "flag": "-O", "description": "使用原文件名保存" },
+        { "flag": "-L", "description": "跟随重定向" },
+        { "flag": "-X", "description": "指定请求方法" },
+        { "flag": "-H", "description": "添加请求头" },
+        { "flag": "-d", "description": "POST 数据" },
+        { "flag": "-I", "description": "只获取响应头" }
+      ],
+      "examples": [
+        { "cmd": "curl https://example.com", "desc": "获取网页内容" },
+        { "cmd": "curl -O https://example.com/file.zip", "desc": "下载文件" },
+        { "cmd": "curl -X POST -d \"key=value\" https://api.example.com", "desc": "发送 POST 请求" },
+        { "cmd": "curl -I https://example.com", "desc": "查看响应头" }
+      ]
+    },
+    {
+      "name": "wget",
+      "category": "网络",
+      "description": "非交互式网络文件下载工具",
+      "syntax": "wget [选项] URL",
+      "options": [
+        { "flag": "-O", "description": "指定输出文件名" },
+        { "flag": "-c", "description": "断点续传" },
+        { "flag": "-r", "description": "递归下载" },
+        { "flag": "-q", "description": "安静模式" }
+      ],
+      "examples": [
+        { "cmd": "wget https://example.com/file.zip", "desc": "下载文件" },
+        { "cmd": "wget -c https://example.com/large.zip", "desc": "断点续传下载" },
+        { "cmd": "wget -r https://example.com/dir/", "desc": "递归下载整个目录" }
+      ]
+    },
+    {
+      "name": "ping",
+      "category": "网络",
+      "description": "测试网络连接",
+      "syntax": "ping [选项] 主机",
+      "options": [
+        { "flag": "-c", "description": "发送指定次数包" },
+        { "flag": "-i", "description": "设置发送间隔" }
+      ],
+      "examples": [
+        { "cmd": "ping google.com", "desc": "测试连接" },
+        { "cmd": "ping -c 4 google.com", "desc": "发送 4 个包" }
+      ]
+    },
+    {
+      "name": "netstat",
+      "category": "网络",
+      "description": "显示网络连接、路由表、接口统计等",
+      "syntax": "netstat [选项]",
+      "options": [
+        { "flag": "-tuln", "description": "显示监听的端口" },
+        { "flag": "-a", "description": "显示所有连接" },
+        { "flag": "-r", "description": "显示路由表" },
+        { "flag": "-s", "description": "显示统计信息" }
+      ],
+      "examples": [
+        { "cmd": "netstat -tuln", "desc": "查看所有监听端口" },
+        { "cmd": "netstat -rn", "desc": "查看路由表" }
+      ]
+    },
+    {
+      "name": "tar",
+      "category": "文件管理",
+      "description": "打包和压缩文件 (tape archive)",
+      "syntax": "tar [选项] [归档文件] [文件...]",
+      "options": [
+        { "flag": "-c", "description": "创建新归档" },
+        { "flag": "-x", "description": "解压归档" },
+        { "flag": "-v", "description": "显示详细过程" },
+        { "flag": "-f", "description": "指定归档文件名" },
+        { "flag": "-z", "description": "使用 gzip 压缩/解压" },
+        { "flag": "-j", "description": "使用 bzip2 压缩/解压" },
+        { "flag": "-J", "description": "使用 xz 压缩/解压" }
+      ],
+      "examples": [
+        { "cmd": "tar -cvf backup.tar file1 file2", "desc": "创建 tar 包" },
+        { "cmd": "tar -xvf backup.tar", "desc": "解压 tar 包" },
+        { "cmd": "tar -czvf archive.tar.gz dir/", "desc": "创建 gzip 压缩归档" },
+        { "cmd": "tar -xzvf archive.tar.gz", "desc": "解压 gzip 归档" },
+        { "cmd": "tar -tjf archive.tar.bz2", "desc": "查看 bzip2 归档内容" }
+      ]
+    },
+    {
+      "name": "gzip",
+      "category": "文件管理",
+      "description": "使用 GNU zip 压缩文件",
+      "syntax": "gzip [选项] 文件...",
+      "options": [
+        { "flag": "-d", "description": "解压文件" },
+        { "flag": "-r", "description": "递归压缩目录" },
+        { "flag": "-v", "description": "显示详细过程" }
+      ],
+      "examples": [
+        { "cmd": "gzip file.txt", "desc": "压缩文件" },
+        { "cmd": "gzip -d file.txt.gz", "desc": "解压文件" }
+      ]
+    },
+    {
+      "name": "zip",
+      "category": "文件管理",
+      "description": "创建或解压 zip 压缩包",
+      "syntax": "zip [选项] 压缩包.zip 文件...",
+      "options": [
+        { "flag": "-r", "description": "递归压缩目录" },
+        { "flag": "-d", "description": "从压缩包删除文件" },
+        { "flag": "-u", "description": "更新压缩包" }
+      ],
+      "examples": [
+        { "cmd": "zip -r archive.zip dir/", "desc": "递归压缩目录" },
+        { "cmd": "zip -u archive.zip newfile.txt", "desc": "更新压缩包" }
+      ]
+    },
+    {
+      "name": "ln",
+      "category": "文件管理",
+      "description": "创建链接 (link)",
+      "syntax": "ln [选项] 目标 [链接名]",
+      "options": [
+        { "flag": "-s", "description": "创建符号链接（软链接）" },
+        { "flag": "-f", "description": "强制覆盖已存在的链接" },
+        { "flag": "-v", "description": "显示详细过程" }
+      ],
+      "examples": [
+        { "cmd": "ln -s /path/to/target linkname", "desc": "创建符号链接" },
+        { "cmd": "ln file.txt hardlink.txt", "desc": "创建硬链接" }
+      ]
+    },
+    {
+      "name": "which",
+      "category": "系统管理",
+      "description": "查找命令的可执行文件路径",
+      "syntax": "which [选项] 命令...",
+      "options": [
+        { "flag": "-a", "description": "显示所有匹配路径" }
+      ],
+      "examples": [
+        { "cmd": "which ls", "desc": "查找 ls 命令路径" },
+        { "cmd": "which -a python", "desc": "显示所有 python 路径" }
+      ]
+    },
+    {
+      "name": "whereis",
+      "category": "系统管理",
+      "description": "查找命令的二进制文件、源文件和手册页位置",
+      "syntax": "whereis [选项] 命令",
+      "options": [
+        { "flag": "-b", "description": "只查找二进制文件" },
+        { "flag": "-m", "description": "只查找手册页" }
+      ],
+      "examples": [
+        { "cmd": "whereis ls", "desc": "查找 ls 相关文件" },
+        { "cmd": "whereis -b python", "desc": "只查找 python 二进制文件" }
+      ]
+    },
+    {
+      "name": "xargs",
+      "category": "文本处理",
+      "description": "从标准输入读取参数并执行命令",
+      "syntax": "xargs [选项] 命令",
+      "options": [
+        { "flag": "-n", "description": "每次传递参数的数量" },
+        { "flag": "-I", "description": "替换字符串" },
+        { "flag": "-p", "description": "执行前询问" }
+      ],
+      "examples": [
+        { "cmd": "find . -name \"*.log\" | xargs rm", "desc": "查找并删除所有 log 文件" },
+        { "cmd": "echo \"file1 file2\" | xargs -n1 echo", "desc": "逐行输出" },
+        { "cmd": "cat files.txt | xargs -I {} cp {} /backup/", "desc": "批量复制文件" }
+      ]
+    },
+    {
+      "name": "tee",
+      "category": "文本处理",
+      "description": "从标准输入读取并写入文件和标准输出",
+      "syntax": "tee [选项] [文件...]",
+      "options": [
+        { "flag": "-a", "description": "追加到文件而不是覆盖" }
+      ],
+      "examples": [
+        { "cmd": "echo \"hello\" | tee file.txt", "desc": "同时输出和写入文件" },
+        { "cmd": "command | tee -a logfile.log", "desc": "追加输出到日志文件" }
+      ]
+    },
+    {
+      "name": "diff",
+      "category": "文本处理",
+      "description": "比较文件差异 (difference)",
+      "syntax": "diff [选项] 文件 1 文件 2",
+      "options": [
+        { "flag": "-r", "description": "递归比较目录" },
+        { "flag": "-u", "description": "统一格式输出" },
+        { "flag": "-q", "description": "只报告是否不同" },
+        { "flag": "-y", "description": "并排显示差异" }
+      ],
+      "examples": [
+        { "cmd": "diff file1.txt file2.txt", "desc": "比较两个文件" },
+        { "cmd": "diff -ru dir1 dir2", "desc": "递归比较目录" },
+        { "cmd": "diff -y file1 file2", "desc": "并排比较" }
+      ]
+    },
+    {
+      "name": "scp",
+      "category": "网络",
+      "description": "安全的文件远程复制 (secure copy)",
+      "syntax": "scp [选项] 源文件 目标",
+      "options": [
+        { "flag": "-r", "description": "递归复制整个目录" },
+        { "flag": "-P", "description": "指定端口号" },
+        { "flag": "-p", "description": "保留文件属性" }
+      ],
+      "examples": [
+        { "cmd": "scp file.txt user@host:/path/", "desc": "复制文件到远程主机" },
+        { "cmd": "scp -r dir/ user@host:/path/", "desc": "递归复制目录" },
+        { "cmd": "scp user@host:/path/file.txt .", "desc": "从远程主机复制文件到本地" }
+      ]
+    },
+    {
+      "name": "rsync",
+      "category": "文件管理",
+      "description": "快速增量文件同步工具 (remote sync)",
+      "syntax": "rsync [选项] 源文件 目标",
+      "options": [
+        { "flag": "-a", "description": "归档模式，保留所有属性" },
+        { "flag": "-v", "description": "显示详细过程" },
+        { "flag": "-z", "description": "压缩传输" },
+        { "flag": "-P", "description": "显示进度并支持断点续传" },
+        { "flag": "--delete", "description": "删除目标目录多余的文件" }
+      ],
+      "examples": [
+        { "cmd": "rsync -av source/ dest/", "desc": "同步目录" },
+        { "cmd": "rsync -avz -e ssh user@host:/data/ /backup/", "desc": "通过 SSH 远程同步" },
+        { "cmd": "rsync -av --delete src/ dst/", "desc": "同步并删除目标多余文件" }
+      ]
+    }
+  ]
+}
